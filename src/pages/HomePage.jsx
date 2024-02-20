@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
+import Banner from '../components/banner.component';
 
 
 const HomePage = () => {
@@ -7,9 +8,7 @@ const HomePage = () => {
     <>
       <Grid container style={{ marginTop: '5px' }}>
         <Grid item xs={12}>
-        <div style={{ height: '250px', backgroundColor: 'black' }}>
-            Banner
-          </div>
+        <Banner></Banner>
         </Grid>
         <Grid item xs={12} style={{ marginTop: '16px', marginBottom: '20px' }}>
           <div style={{ height: '480px', backgroundColor: 'black' }}>
