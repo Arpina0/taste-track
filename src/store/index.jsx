@@ -12,6 +12,7 @@ export const GlobalStoreActionType = {
     SET_STATE_FILTER_CRITERIA: "SET_STATE_FILTER_CRITERIA",
     SET_GENRE_FILTER_CRITERIA: "SET_GENRE_FILTER_CRITERIA",
     SET_SEARCH_KEYWORD: "SET_SEARCH_KEYWORD",
+    SET_PAGE_NUMBER:"SET_PAGE_NUMBER"
 }
 
 function GlobalStoreContextProvider(props) {
@@ -19,7 +20,8 @@ function GlobalStoreContextProvider(props) {
         restaurants: [],
         state_filters: {All:true},
         genre_filter: {All:true},
-        search_keyword: ""
+        search_keyword: "",
+        page_number: 1
     });
 
     // Data store's reducers that will handle all the state changes
@@ -37,13 +39,16 @@ function GlobalStoreContextProvider(props) {
             case GlobalStoreActionType.SET_STATE_FILTER_CRITERIA: {
                 return setStore({
                     ...store,
+                    page_number: 1,
                     state_filters: payload,
+
                 });
             }
             //Sets the chosen genre filters
             case GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA: {
                 return setStore({
                     ...store,
+                    page_number: 1,
                     genre_filter: payload,
                 });
             }
@@ -51,7 +56,15 @@ function GlobalStoreContextProvider(props) {
             case GlobalStoreActionType.SET_SEARCH_KEYWORD: {
                 return setStore({
                     ...store,
+                    page_number: 1,
                     search_keyword: payload,
+                });
+            }
+            //Sets the page number
+            case GlobalStoreActionType.SET_PAGE_NUMBER: {
+                return setStore({
+                    ...store,
+                    page_number: payload,
                 });
             }
             
@@ -163,6 +176,14 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA,
             payload: new_genre_filter
+        });
+    }
+
+    store.setPageNumber = (page) => {
+
+        storeReducer({
+            type: GlobalStoreActionType.SET_PAGE_NUMBER,
+            payload: page
         });
     }
     

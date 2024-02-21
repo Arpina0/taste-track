@@ -8,27 +8,34 @@ import GenreFilter from './genre_filter_section.component';
 
 const Restaurants_Table = () => {
     const { store } = useContext(GlobalStoreContext);
-    const [page,setPage] = useState(1);
-    let filteredRestaurants = store.restaurants;   
+    let filteredRestaurants = store.restaurants;  
+    let page = store.page_number
+
+    const handlePagination = (event, newPage) =>{
+        store.setPageNumber(newPage);
+    }
 
     // Check if state_filters is not empty
     const isStateFilterNotEmpty = Object.keys(store.state_filters).length > 0;
     // Check if genre_filters is not empty
     const isGenreFilterNotEmpty = Object.keys(store.genre_filter).length > 0;
 
+    //filter search results
     if (store.search_keyword) {
         const searchKeyword = store.search_keyword.toLowerCase();
         filteredRestaurants = filteredRestaurants.filter(restaurant =>
           restaurant.name.toLowerCase().includes(searchKeyword) || restaurant.city.toLowerCase().includes(searchKeyword) || restaurant.genre.toLowerCase().includes(searchKeyword)
         );
       }
-      
+    
+    //filter states
     if (isStateFilterNotEmpty && !store.state_filters.hasOwnProperty('All') ) {
         filteredRestaurants = filteredRestaurants.filter(restaurant =>
             store.state_filters[restaurant.state]
         );
     }
 
+    //filter genres
     if (isGenreFilterNotEmpty && !store.genre_filter.hasOwnProperty('All') ) {
         filteredRestaurants = filteredRestaurants.filter(restaurant => {
             const restaurantGenres = restaurant.genre.split(',');
@@ -38,17 +45,13 @@ const Restaurants_Table = () => {
     
     let restaurants_sliced = filteredRestaurants.slice((page-1)*10,((page-1)*10)+10)
 
-    const handlePagination = (event, newPage) =>{
-        setPage(newPage)
-    }
-
     let listItems = restaurants_sliced.map((restaurant, index) => (
         <tr key={index} style={{  
             borderBottom: '2px solid white', 
             height: '60px', 
             boxSizing: 'border-box' 
         }}>
-            <td>{index + 1}.{restaurant.name}</td>
+            <td>{(page - 1) * 10 + index + 1}.{restaurant.name}</td>
             <td>{restaurant.city}</td>
             <td>{restaurant.state}</td>
             <td>{restaurant.telephone}</td>
