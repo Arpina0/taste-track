@@ -9,40 +9,36 @@ import GenreFilter from './genre_filter_section.component';
 const Restaurants_Table = () => {
     const { store } = useContext(GlobalStoreContext);
     const [page,setPage] = useState(1);
-
-    let filteredRestaurants = store.restaurants;
+    let filteredRestaurants = store.restaurants;   
 
     // Check if state_filters is not empty
     const isStateFilterNotEmpty = Object.keys(store.state_filters).length > 0;
-    
-    if (store.state_filters.hasOwnProperty('All')){
-        console.log("hepsi secili")
-    }
-    
+    // Check if genre_filters is not empty
+    const isGenreFilterNotEmpty = Object.keys(store.genre_filter).length > 0;
+
+    if (store.search_keyword) {
+        const searchKeyword = store.search_keyword.toLowerCase();
+        filteredRestaurants = filteredRestaurants.filter(restaurant =>
+          restaurant.name.toLowerCase().includes(searchKeyword) || restaurant.city.toLowerCase().includes(searchKeyword) || restaurant.genre.toLowerCase().includes(searchKeyword)
+        );
+      }
+
     if (isStateFilterNotEmpty && !store.state_filters.hasOwnProperty('All') ) {
         filteredRestaurants = filteredRestaurants.filter(restaurant =>
             store.state_filters[restaurant.state]
         );
     }
 
-    console.log("genre filters",store.genre_filter)
-        // Check if genre_filters is not empty
-        const isGenreFilterNotEmpty = Object.keys(store.genre_filter).length > 0;
-    
-        if (isGenreFilterNotEmpty && !store.genre_filter.hasOwnProperty('All') ) {
-            filteredRestaurants = filteredRestaurants.filter(restaurant => {
-                const restaurantGenres = restaurant.genre.split(',');
-                return restaurantGenres.some(restaurantGenre => store.genre_filter[restaurantGenre]);
-            });
-        }
+    if (isGenreFilterNotEmpty && !store.genre_filter.hasOwnProperty('All') ) {
+        filteredRestaurants = filteredRestaurants.filter(restaurant => {
+            const restaurantGenres = restaurant.genre.split(',');
+            return restaurantGenres.some(restaurantGenre => store.genre_filter[restaurantGenre]);
+        });
+    }
         
-    
-
     let restaurants_sliced = filteredRestaurants.slice((page-1)*10,((page-1)*10)+10)
 
-
     const handlePagination = (event, newPage) =>{
-        console.log("page",newPage)
         setPage(newPage)
     }
 

@@ -9,15 +9,17 @@ export const GlobalStoreContext = createContext({});
 
 export const GlobalStoreActionType = {
     LOAD_RESTAURANT_INFO: "LOAD_RESTAURANT_INFO",
-    SET_STATE_FILTER_CRITERIA:"SET_STATE_FILTER_CRITERIA",
-    SET_GENRE_FILTER_CRITERIA:"SET_GENRE_FILTER_CRITERIA",
+    SET_STATE_FILTER_CRITERIA: "SET_STATE_FILTER_CRITERIA",
+    SET_GENRE_FILTER_CRITERIA: "SET_GENRE_FILTER_CRITERIA",
+    SET_SEARCH_KEYWORD: "SET_SEARCH_KEYWORD",
 }
 
 function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
         restaurants: [],
         state_filters: {All:true},
-        genre_filter: {All:true}
+        genre_filter: {All:true},
+        search_keyword: ""
     });
 
     // Data store's reducers that will handle all the state changes
@@ -38,11 +40,18 @@ function GlobalStoreContextProvider(props) {
                     state_filters: payload,
                 });
             }
-            //Sets the chosen state filters
+            //Sets the chosen genre filters
             case GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA: {
                 return setStore({
                     ...store,
                     genre_filter: payload,
+                });
+            }
+            //Sets the search keyword
+            case GlobalStoreActionType.SET_SEARCH_KEYWORD: {
+                return setStore({
+                    ...store,
+                    search_keyword: payload,
                 });
             }
             
@@ -52,10 +61,19 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.loadRestaurants = async function () {
-        console.log("store.loadRestaurants");
         const response = await getRestaurants();
         if (response.status === 200) {
             let restaurants = response.data;
+            restaurants.sort((a, b) => {
+                if (a.name < b.name) {
+                    return -1; 
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0; 
+            });
+            
             console.log(restaurants)
             storeReducer({
                 type: GlobalStoreActionType.LOAD_RESTAURANT_INFO,
@@ -66,6 +84,14 @@ function GlobalStoreContextProvider(props) {
         else {
             console.log("API FAILED TO GET THE RESTEURANT INFO");
         }
+    }
+
+    store.setSearchKeyword = (keyword) => {
+
+        storeReducer({
+            type: GlobalStoreActionType.SET_SEARCH_KEYWORD,
+            payload: keyword
+        });
     }
 
     store.setStateAllFilter = () => {

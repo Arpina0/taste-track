@@ -1,11 +1,26 @@
 import React from 'react';
 import { Box,Typography, TextField, InputAdornment } from '@mui/material';
+import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import bannerImage from '../assets/Customer Find Location.svg';
 import "../App.css";
+import GlobalStoreContext from '../store';
+import { useContext } from 'react';
 
 const Banner = () => {
+    const [keyword, setKeyword] = useState('');
+    const {store} = useContext(GlobalStoreContext);
 
+    const handleInputChange = (event) => {
+        setKeyword(event.target.value);
+      };
+    
+      const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            store.setSearchKeyword(keyword);
+        }
+      };
+      
     return (
         <>
             <Box className='homebanner' display="flex" sx={{
@@ -51,6 +66,9 @@ const Banner = () => {
                             sx: { borderRadius: '15px' , marginTop: '15px',backgroundColor: '#e8e8eb' }
                         }}
                         fullWidth
+                        value={keyword}
+                        onChange={handleInputChange}
+                        onKeyPress={handleKeyPress}
                     />
                 </Box>
     
