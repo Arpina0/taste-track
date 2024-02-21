@@ -3,12 +3,12 @@ import Grid from '@mui/material/Grid';
 import Banner from '../components/banner.component';
 import GlobalStoreContext from '../store';
 import { useContext, useEffect } from 'react'; 
+import Restaurants_Table from '../components/restaurants_table.component';
 
 
 const HomePage = () => {
     const {store} = useContext(GlobalStoreContext)
-    console.log("store info",store)
-
+  
     useEffect(() => {
         store.loadRestaurants();
     },[]
@@ -20,10 +20,8 @@ const HomePage = () => {
         <Grid item xs={12}>
         <Banner></Banner>
         </Grid>
-        <Grid item xs={12} style={{ marginTop: '16px', marginBottom: '20px' }}>
-          <div style={{ height: '480px', backgroundColor: 'black' }}>
-            Table
-          </div>
+        <Grid item xs={12} style={{ marginTop: '30px', marginBottom: '20px' }}>
+            <Restaurants_Table></Restaurants_Table>
         </Grid>
       </Grid>
     </>
