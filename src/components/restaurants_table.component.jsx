@@ -43,8 +43,12 @@ const Restaurants_Table = () => {
     }
 
     let listItems = restaurants_sliced.map((restaurant, index) => (
-        <tr key={index}>
-            <td>{restaurant.name}</td>
+        <tr key={index} style={{  
+            borderBottom: '2px solid white', 
+            height: '60px', 
+            boxSizing: 'border-box' 
+        }}>
+            <td>{index + 1}.{restaurant.name}</td>
             <td>{restaurant.city}</td>
             <td>{restaurant.state}</td>
             <td>{restaurant.telephone}</td>
@@ -88,40 +92,73 @@ const Restaurants_Table = () => {
                     alignItems: 'flex-start',
                 }}
             >
-                <Box
-                    sx={{
-                        height: 500,
-                        overflowY: 'auto', 
-                        background: 'rgba(0,0,0,0.5)', 
-                        width: 'auto', 
-                    }}
-                >
-                    <table style={{ width: '100%', color: 'white' }}> 
-                        <thead>
-                            <tr>
-                                <th>Restaurant Name</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>Phone Number</th>
-                                <th>Genre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {listItems}
-                        </tbody>
-                    </table>
-                </Box>
+        <Box
+            sx={{
+                height: 500,
+                overflowY: 'auto',
+                background: 'rgba(0,0,0,0.5)',
+                borderRadius: "15px",
+                width: 980,
+            
+                '& table': {
+                    tableLayout: 'fixed',
+                    width: '100%',
+                    color: 'white',
+                    textAlign: 'left',
+                },
+                '& thead th': {
+                    position: 'sticky',
+                    top: 0,
+                    background: 'rgba(0,0,0,0.5)',
+                    zIndex: 10,
+                    '&:nth-of-type(1)': { width: '30%' },
+                    '&:nth-of-type(2)': { width: '20%' },
+                    '&:nth-of-type(3)': { width: '10%' },
+                    '&:nth-of-type(4)': { width: '20%' },
+                    '&:nth-of-type(5)': { width: '20%' },
+                },
+                '& tbody tr': {
+                    height: 'auto',
+                    '& td': {
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        padding: '10px',
+                        borderBottom: '1px solid white',
+                    },
+                },
+            }}
+        >
+            <table>
+                <thead>
+                    <tr>
+                        <th>Restaurant Name</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Phone Number</th>
+                        <th>Genre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {listItems}
+                </tbody>
+            </table>
+        </Box>
 
-                <Pagination
-                    count={Math.ceil(filteredRestaurants.length / 10)}
-                    variant="outlined"
-                    color="primary"
-                    page={page}
-                    onChange={handlePagination}
-                    sx={{
-                        marginTop: 2, 
-                    }}
-                />
+        <Pagination
+            count={Math.ceil(filteredRestaurants.length / 10)}
+            variant="outlined"
+            color="primary"
+            page={page}
+            onChange={handlePagination}
+            sx={{
+                marginTop: 2,
+                '.MuiPaginationItem-root': {
+                    color: 'white',
+                    borderColor: 'white'
+                } 
+            }}
+            />
             </Box>
         </Box>
         

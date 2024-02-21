@@ -24,7 +24,7 @@ const Banner = () => {
             borderRadius: "15px",
             justifyContent: 'center',
             maxWidth: "100%",
-            height: 150
+            height: 170
         }}>
         <Box m={1} flexDirection="column" sx={{ marginX: 10}}>
              <Typography variant="h4" color="white" sx={{
