@@ -7,16 +7,17 @@ import { getRestaurants } from './store-request-api/index';
 
 export const GlobalStoreContext = createContext({});
 
-
 export const GlobalStoreActionType = {
     LOAD_RESTAURANT_INFO: "LOAD_RESTAURANT_INFO",
     SET_STATE_FILTER_CRITERIA:"SET_STATE_FILTER_CRITERIA",
+    SET_GENRE_FILTER_CRITERIA:"SET_GENRE_FILTER_CRITERIA",
 }
 
 function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
         restaurants: [],
-        state_filters:{}
+        state_filters: {All:true},
+        genre_filter: {All:true}
     });
 
     // Data store's reducers that will handle all the state changes
@@ -37,6 +38,14 @@ function GlobalStoreContextProvider(props) {
                     state_filters: payload,
                 });
             }
+            //Sets the chosen state filters
+            case GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA: {
+                return setStore({
+                    ...store,
+                    genre_filter: payload,
+                });
+            }
+            
             default:
                 return store;
         }
@@ -59,17 +68,31 @@ function GlobalStoreContextProvider(props) {
         }
     }
 
+    store.setStateAllFilter = () => {
+        let new_state_filter = {All:true};
+        storeReducer({
+            type: GlobalStoreActionType.SET_STATE_FILTER_CRITERIA,
+            payload: new_state_filter
+        });
+
+    }
 
     store.setStateFilter = (state) => {
-        let new_state_filter = { ...store.state_filters };
-        new_state_filter[state] = true
+        let new_state_filter;
+        
+        if (!store.state_filters.hasOwnProperty('All')) {
+            new_state_filter = { ...store.state_filters };
+            new_state_filter[state] = true;
+        } else {
+            new_state_filter = { [state]: true };
+        }
 
         storeReducer({
             type: GlobalStoreActionType.SET_STATE_FILTER_CRITERIA,
             payload: new_state_filter
         });
-        
-    }
+    };
+    
     
     store.deselectState = (state) => {
         let new_state_filter = { ...store.state_filters };
@@ -80,8 +103,43 @@ function GlobalStoreContextProvider(props) {
             payload: new_state_filter
         });
     }
+
+    store.setGenreAllFilter = () => {
+        let new_genre_filter = {All:true};
+
+        storeReducer({
+            type: GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA,
+            payload: new_genre_filter
+        });
+
+    }
+
+    store.setGenreFilter = (genre) => {
+        let new_genre_filter;
+
+        if (!store.genre_filter.hasOwnProperty('All')) {
+            new_genre_filter = { ...store.genre_filter };
+            new_genre_filter[genre] = true;
+        } else {
+            new_genre_filter = { [genre]: true };
+        }
+
+        storeReducer({
+            type: GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA,
+            payload: new_genre_filter
+        });
+    }
+
+    store.deselectGenre = (genre) => {
+        let new_genre_filter = { ...store.genre_filter };
+        delete new_genre_filter[genre] 
+
+        storeReducer({
+            type: GlobalStoreActionType.SET_GENRE_FILTER_CRITERIA,
+            payload: new_genre_filter
+        });
+    }
     
-   
     return (
         <GlobalStoreContext.Provider value={{
             store

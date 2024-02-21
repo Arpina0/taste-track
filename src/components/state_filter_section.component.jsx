@@ -15,12 +15,13 @@ const StatesFilter = () => {
     'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 
     'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
   ];
-  
+
   const [checkedStates, setCheckedStates] = useState(Array(USStates.length).fill(false));
   const {store} = useContext(GlobalStoreContext);
 
   const handleAllChange = (event) => {
     setCheckedStates(Array(USStates.length).fill(event.target.checked));
+    store.setStateAllFilter();
   };
 
   const handleStateChange = (index) => (event) => {
@@ -35,7 +36,7 @@ const StatesFilter = () => {
         store.deselectState(USStates[index]);
     }
   };
-
+  
   const allChecked = checkedStates.every(Boolean);
   const indeterminate = checkedStates.some(Boolean) && !allChecked;
 
