@@ -2,16 +2,19 @@ import React from 'react';
 import Pagination from '@mui/material/Pagination';
 import GlobalStoreContext from '../store';
 import { Box } from '@mui/material';
-import { useState } from 'react';
-
-import { useContext } from 'react';
+import { useState ,useContext} from 'react';
+import StatesFilter from './filter_section.component'
 
 const Restaurants_Table = () => {
     const { store } = useContext(GlobalStoreContext);
     const [page,setPage] = useState(1);
 
-    let restaurants_sliced = store.restaurants.slice((page-1)*10,((page-1)*10)+10)
-
+    const filteredRestaurants = store.restaurants.filter(restaurant =>
+        store.state_filters[restaurant.state]
+    );
+    console.log("filteres resaurants",filteredRestaurants )
+    let restaurants_sliced = filteredRestaurants.slice((page-1)*10,((page-1)*10)+10)
+    
     console.log("store");
     console.log("rest",store.restaurants)
 
@@ -63,8 +66,9 @@ const Restaurants_Table = () => {
                 p: 2
             }}
         >
+            <StatesFilter></StatesFilter>
         <Pagination
-            count={Math.ceil(store.restaurants.length / 10)}
+            count={Math.ceil(filteredRestaurants.length / 10)}
             variant="outlined"
             color="primary"
             page={page}
