@@ -16,12 +16,12 @@ const HomePage = () => {
  
   return (
     <>
-      <Grid container style={{ marginTop: '5px' }}>
+      <Grid container style={{ marginTop: '1px' }}>
         <Grid item xs={12}>
-        <Banner></Banner>
+          <Banner/>
         </Grid>
         <Grid item xs={12} style={{ marginTop: '30px', marginBottom: '20px' }}>
-            <Restaurants_Table></Restaurants_Table>
+          <Restaurants_Table/>
         </Grid>
       </Grid>
     </>

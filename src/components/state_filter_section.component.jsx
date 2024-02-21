@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { useState} from 'react';
 import GlobalStoreContext from '../store';
 import { useContext } from 'react';
+import { Typography } from '@mui/material';
 
 const StatesFilter = () => {
 
@@ -52,13 +53,39 @@ const StatesFilter = () => {
               onChange={handleStateChange(index)}
             />
           }
+          sx={{ color: 'black' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
         />
       ))}
     </Box>
   );
 
   return (
-    <div>
+    <Box sx={{
+      backgroundColor: '#e8e8eb',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19)',
+      borderRadius: "15px",
+      maxHeight: 200,
+      width:150,
+      overflowY: 'scroll',
+      display: 'flex',
+      flexDirection: 'column',
+      ml: 3,
+      padding:1, '&::-webkit-scrollbar': {
+        width: '10px', 
+      },
+      '&::-webkit-scrollbar-track': {
+        boxShadow: 'inset 0 0 5px grey',
+        borderRadius: '8px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: 'darkgrey',
+        borderRadius: '30px',
+      },
+      '&::-webkit-scrollbar-thumb:hover': {
+        background: '#b30000',
+      }}}>
+      
+      <Typography sx={{ color: 'black',fontSize: '15px' }} >States</Typography>
       <FormControlLabel
         label="ALL"
         control={
@@ -68,9 +95,10 @@ const StatesFilter = () => {
             onChange={handleAllChange}
           />
         }
+        sx={{ color: 'black' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
       />
       {children}
-    </div>
+    </Box>
   );
 }
 
