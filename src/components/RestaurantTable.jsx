@@ -3,8 +3,8 @@ import Pagination from '@mui/material/Pagination';
 import GlobalStoreContext from '../store';
 import { Box, Grid } from '@mui/material';
 import { useState ,useContext} from 'react';
-import StatesFilter from './state_filter_section.component'
-import GenreFilter from './genre_filter_section.component';
+import StatesFilter from './StateFilterSection'
+import GenreFilter from './GenreFilterSection';
 
 const Restaurants_Table = () => {
     const { store } = useContext(GlobalStoreContext);

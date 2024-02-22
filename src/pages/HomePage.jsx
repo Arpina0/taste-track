@@ -1,9 +1,9 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import Banner from '../components/banner.component';
+import Banner from '../components/Banner';
 import GlobalStoreContext from '../store';
 import { useContext, useEffect } from 'react'; 
-import Restaurants_Table from '../components/restaurants_table.component';
+import Restaurants_Table from '../components/RestaurantTable';
 
 
 const HomePage = () => {
@@ -13,7 +13,7 @@ const HomePage = () => {
         store.loadRestaurants();
     },[]
     );
- 
+
   return (
     <>
       <Grid container style={{ marginTop: '1px' }}>
