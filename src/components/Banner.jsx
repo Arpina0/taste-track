@@ -20,8 +20,8 @@ const Banner = () => {
     return (
         <Box className='homebanner' display="flex" sx={{
             backgroundColor:'#1876d2',
-            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1), 0 12px 36px rgba(0, 0, 0, 0.15)', // More subtle shadows for modern look
-            borderRadius: "25px", //
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1), 0 12px 36px rgba(0, 0, 0, 0.15)', 
+            borderRadius: "25px", 
             justifyContent: 'center',
             maxWidth: "100%",
             height: 170
