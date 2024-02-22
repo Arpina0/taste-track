@@ -14,7 +14,7 @@ const GenreFilter = () => {
         "Eclectic","European","French","Fusion","Grill","Hawaiian","International","Irish","Italian",
         "Kosher","Japanese","Oysters","Pacific Rim","Pasta","Polynesian","Sandwiches","Seafood","Steak",
         "Sushi","Tea","Traditional","Vegetarian",]
-    
+
       const [checkedGenres, setcheckedGenres] = useState(Array(Genres.length).fill(false));
       const {store} = useContext(GlobalStoreContext);
     
@@ -51,7 +51,7 @@ const GenreFilter = () => {
                   onChange={handleGenreChange(index)}
                 />
               }
-              sx={{ color: 'black' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
+              sx={{ color: 'white' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
             />
           ))}
         </Box>
@@ -59,7 +59,7 @@ const GenreFilter = () => {
     
       return (
         <Box sx={{
-        backgroundColor: '#e8e8eb',
+        backgroundColor: '#30323b',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19)',
         borderRadius: "15px",
         marginTop:5,
@@ -84,7 +84,7 @@ const GenreFilter = () => {
           background: '#b30000',
         }}}>
 
-          <Typography sx={{ color: 'black', fontSize: '15px'}}>Genres</Typography>
+          <Typography sx={{ color: 'white', fontSize: '15px'}}>Genres</Typography>
           <FormControlLabel
             label="ALL"
             control={
@@ -94,7 +94,7 @@ const GenreFilter = () => {
                 onChange={handleAllChange}
               />
             }
-            sx={{ color: 'black', '& .MuiFormControlLabel-label': { fontSize: '13px' } }} 
+            sx={{ color: 'white', '& .MuiFormControlLabel-label': { fontSize: '13px' } }} 
           />
           {children}
         </Box>

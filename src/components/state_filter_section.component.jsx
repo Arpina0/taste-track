@@ -53,7 +53,7 @@ const StatesFilter = () => {
               onChange={handleStateChange(index)}
             />
           }
-          sx={{ color: 'black' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
+          sx={{ color: 'white' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
         />
       ))}
     </Box>
@@ -61,7 +61,7 @@ const StatesFilter = () => {
 
   return (
     <Box sx={{
-      backgroundColor: '#e8e8eb',
+      backgroundColor: '#30323b',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19)',
       borderRadius: "15px",
       maxHeight: 200,
@@ -85,7 +85,7 @@ const StatesFilter = () => {
         background: '#b30000',
       }}}>
       
-      <Typography sx={{ color: 'black',fontSize: '15px' }} >States</Typography>
+      <Typography sx={{ color: 'white',fontSize: '15px' }} >States</Typography>
       <FormControlLabel
         label="ALL"
         control={
@@ -95,7 +95,7 @@ const StatesFilter = () => {
             onChange={handleAllChange}
           />
         }
-        sx={{ color: 'black' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
+        sx={{ color: 'white' ,'& .MuiFormControlLabel-label': { fontSize: '13px' }}} 
       />
       {children}
     </Box>

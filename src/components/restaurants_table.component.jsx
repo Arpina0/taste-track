@@ -27,7 +27,7 @@ const Restaurants_Table = () => {
           restaurant.name.toLowerCase().includes(searchKeyword) || restaurant.city.toLowerCase().includes(searchKeyword) || restaurant.genre.toLowerCase().includes(searchKeyword)
         );
       }
-    
+
     //filter states
     if (isStateFilterNotEmpty && !store.state_filters.hasOwnProperty('All') ) {
         filteredRestaurants = filteredRestaurants.filter(restaurant =>
@@ -67,14 +67,15 @@ const Restaurants_Table = () => {
     return (
         <Box
             sx={{
-                backgroundImage: 'linear-gradient(to bottom, #505051, #303031)',
+                backgroundColor:'#252731',
+                //backgroundImage: 'linear-gradient(to bottom, #505051, #303031)',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19)',
-                borderRadius: "15px",
+                borderRadius: "25px",
                 display: 'flex',
                 flexDirection: 'row', 
                 alignItems: 'flex-start',
                 p: 2,
-                backroundColor:'white'
+              
             }}
         >
             <Box
@@ -99,7 +100,7 @@ const Restaurants_Table = () => {
             sx={{
                 height: 500,
                 overflowY: 'auto',
-                background: 'rgba(0,0,0,0.5)',
+                background: '#30323b',
                 borderRadius: "15px",
                 width: 980,
             
@@ -112,7 +113,7 @@ const Restaurants_Table = () => {
                 '& thead th': {
                     position: 'sticky',
                     top: 0,
-                    background: 'rgba(0,0,0,0.5)',
+                    background: '#1876d2',
                     zIndex: 10,
                     '&:nth-of-type(1)': { width: '30%' },
                     '&:nth-of-type(2)': { width: '20%' },

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box,Typography, TextField, InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import bannerImage from '../assets/Customer Find Location.svg';
+import bannerImage from '../assets/Cafetaria Isometric 01.svg';
 import "../App.css";
 import GlobalStoreContext from '../store';
 import { useContext } from 'react';
@@ -19,28 +19,27 @@ const Banner = () => {
     
     return (
         <Box className='homebanner' display="flex" sx={{
-            backgroundImage: 'linear-gradient(to bottom, #505051, #303031)',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19)',
-            borderRadius: "15px",
+            backgroundColor:'#1876d2',
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1), 0 12px 36px rgba(0, 0, 0, 0.15)', // More subtle shadows for modern look
+            borderRadius: "25px", //
             justifyContent: 'center',
             maxWidth: "100%",
             height: 170
         }}>
         <Box m={1} flexDirection="column" sx={{ marginX: 10}}>
-             <Typography variant="h4" color="white" sx={{
+             <Typography variant="h4" color="#252731" sx={{
+                    marginTop:2,
                     fontWeight: 'bold',
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
                     letterSpacing: '0.05em',
             }}>
                 TasteTrack
             </Typography>
     
-        <Typography color="white" sx={{
-            fontSize: '0.3 rem',
+        <Typography color="#252731" sx={{
+            fontSize: '0.5 rem',
             fontWeight: 'lighter',
             fontStyle: 'italic',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
             fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             letterSpacing: '0.02em',
         }}>
@@ -49,7 +48,7 @@ const Banner = () => {
     
         <TextField
             variant="outlined"
-            size="medium"
+            size="small"
             placeholder="Your next favorite meal is just a search away"
             InputProps={{
                 startAdornment: (
@@ -57,7 +56,7 @@ const Banner = () => {
                         <SearchIcon />
                          </InputAdornment>
                 ),
-            sx: { borderRadius: '15px' , marginTop: '15px',backgroundColor: '#e8e8eb' }}}
+            sx: { borderRadius: '15px' , marginTop: '15px',backgroundColor: '#30323b',color:'white' }}}
             fullWidth
             value={keyword}
              onChange={handleInputChange}
